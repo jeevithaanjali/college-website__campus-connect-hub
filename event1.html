@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Calendar 2025</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            text-align: center;
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px;
+            margin: 0;
+        }
+        .container {
+            width: 80%;
+            margin: 20px auto;
+        }
+        .year {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        .month {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 30%;
+            margin-bottom: 20px;
+        }
+        .month h2 {
+            color: #2980b9;
+            border-bottom: 3px solid #2980b9;
+            padding-bottom: 10px;
+            text-align: center;
+        }
+        .event {
+            background: #ecf0f1;
+            padding: 15px;
+            margin: 10px 0;
+            border-left: 5px solid #e74c3c;
+            border-radius: 5px;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        .event:hover {
+            background: #dfe6e9;
+        }
+        .event i {
+            font-size: 24px;
+            margin-right: 15px;
+            color: #e74c3c;
+        }
+        .event h3 {
+            margin: 0;
+            color: #2c3e50;
+        }
+        .event p {
+            margin: 5px 0 0;
+            color: #34495e;
+        }
+        .event-details {
+            display: none;
+            margin-top: 10px;
+            padding-left: 40px;
+            color: #34495e;
+        }
+    </style>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script>
+        function toggleDetails(eventId) {
+            const details = document.getElementById(eventId);
+            details.style.display = details.style.display === "block" ? "none" : "block";
+        }
+    </script>
+</head>
+<body>
+
+<h1>📅 College Calendar 2025</h1>
+<div class="container">
+    <div class="year">
+        <!-- January -->
+        <div class="month">
+            <h2>January</h2>
+            <div class="event" onclick="toggleDetails('event1')">
+                <i class="fas fa-calendar-check"></i>
+                <div>
+                    <h3>New Year's Welcome Event</h3>
+                    <p>Date: January 10</p>
+                </div>
+                <div class="event-details" id="event1">
+                    <p>Description: Kick off the new semester with activities and refreshments.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- February -->
+        <div class="month">
+            <h2>February</h2>
+            <div class="event" onclick="toggleDetails('event2')">
+                <i class="fas fa-briefcase"></i>
+                <div>
+                    <h3>Career Fair</h3>
+                    <p>Date: February 28</p>
+                </div>
+                <div class="event-details" id="event2">
+                    <p>Description: Meet employers and explore job opportunities.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- March -->
+        <div class="month">
+            <h2>March</h2>
+            <div class="event" onclick="toggleDetails('event3')">
+                <i class="fas fa-music"></i>
+                <div>
+                    <h3>CIA week begin</h3>
+                    <p>Date: March 15</p>
+                </div>
+                <div class="event-details" id="event3">
+                    <p>Description: Internals are start's from this week.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- April -->
+        <div class="month">
+            <h2>April</h2>
+            <div class="event" onclick="toggleDetails('event4')">
+                <i class="fas fa-globe"></i>
+                <div>
+                    <h3>Earth Day Celebration</h3>
+                    <p>Date: April 22</p>
+                </div>
+                <div class="event-details" id="event4">
+                    <p>Description: Participate in clean-up drives and sustainability workshops.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- May -->
+        <div class="month">
+            <h2>May</h2>
+            <div class="event" onclick="toggleDetails('event5')">
+                <i class="fas fa-graduation-cap"></i>
+                <div>
+                    <h3>Final Semester Examination</h3>
+                    <p>Date: May 15</p>
+                </div>
+                <div class="event-details" id="event5">
+                    <p>Description: Final semester exam's are condected</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- June -->
+        <div class="month">
+            <h2>June</h2>
+            <div class="event" onclick="toggleDetails('event6')">
+                <i class="fas fa-book"></i>
+                <div>
+                    <h3>Summer Learning Workshops</h3>
+                    <p>Date: June 10-20</p>
+                </div>
+                <div class="event-details" id="event6">
+                    <p>Description: Enhance your skills with specialized summer workshops.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- July -->
+        <div class="month">
+            <h2>July</h2>
+            <div class="event" onclick="toggleDetails('event7')">
+                <i class="fas fa-users"></i>
+                <div>
+                    <h3>Alumni Meet</h3>
+                    <p>Date: July 15</p>
+                </div>
+                <div class="event-details" id="event7">
+                    <p>Description: Reconnect with former classmates and faculty members.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- August -->
+        <div class="month">
+            <h2>August</h2>
+            <div class="event" onclick="toggleDetails('event8')">
+                <i class="fas fa-handshake"></i>
+                <div>
+                    <h3>Orientation Week</h3>
+                    <p>Date: August 20-25</p>
+                </div>
+                <div class="event-details" id="event8">
+                    <p>Description: Welcome new students with orientation activities.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- September -->
+        <div class="month">
+            <h2>September</h2>
+            <div class="event" onclick="toggleDetails('event9')">
+                <i class="fas fa-chalkboard-teacher"></i>
+                <div>
+                    <h3>Fall Semester Begins</h3>
+                    <p>Date: September 1</p>
+                </div>
+                <div class="event-details" id="event9">
+                    <p>Description: Start of the new academic session.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- October -->
+        <div class="month">
+            <h2>October</h2>
+            <div class="event" onclick="toggleDetails('event10')">
+                <i class="fas fa-ghost"></i>
+                <div>
+                    <h3>Diwali Celabration</h3>
+                    <p>Date: October 31</p>
+                </div>
+                <div class="event-details" id="event10">
+                    <p>Description: Staffs and students are celebrating diwali.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

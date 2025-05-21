@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library System - Student View</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f9f9f9;
+        }
+        h1, h2 {
+            text-align: center;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        button {
+            padding: 10px 15px;
+            margin: 5px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+        }
+        button.borrow {
+            background-color: #008CBA;
+            color: white;
+        }
+        button.borrow:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        input {
+            padding: 10px;
+            margin: 5px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Library System - Student View</h1>
+
+    <h2>Search Books</h2>
+    <input type="text" id="search" placeholder="Search by Title or Author" onkeyup="searchBooks()">
+
+    <h2>Available Books</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>  
+        </thead>
+        <tbody id="bookList"></tbody>
+    </table>
+
+    <script>
+        function loadBooks() {
+            let books = JSON.parse(localStorage.getItem("books")) || [];
+            const bookList = document.getElementById("bookList");
+            bookList.innerHTML = ""; // Clear existing data
+
+            books.forEach(book => {
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${book.id}</td>
+                    <td>${book.title}</td>
+                    <td>${book.author}</td>
+                    <td>${book.status}</td>
+                    <td>
+                        <button class="borrow" onclick="borrowBook('${book.id}')" ${book.status === "Issued" ? "disabled" : ""}>
+                            Borrow
+                        </button>
+                    </td>
+                `;
+                bookList.appendChild(row);
+            });
+        }
+
+        function searchBooks() {
+            const searchInput = document.getElementById("search").value.toLowerCase();
+            const rows = document.querySelectorAll("#bookList tr");
+
+            rows.forEach(row => {
+                const title = row.cells[1].textContent.toLowerCase();
+                const author = row.cells[2].textContent.toLowerCase();
+                row.style.display = (title.includes(searchInput) || author.includes(searchInput)) ? "" : "none";
+            });
+        }
+
+        function borrowBook(bookId) {
+            let books = JSON.parse(localStorage.getItem("books")) || [];
+            const book = books.find(b => b.id === bookId);
+
+            if (book && book.status === "Available") {
+                book.status = "Issued";
+                localStorage.setItem("books", JSON.stringify(books));
+                alert(`You have successfully borrowed: ${book.title}`);
+                loadBooks(); // Refresh the table
+            } else {
+                alert("This book is already issued.");
+            }
+        }
+
+        window.onload = loadBooks;
+    </script>
+<marquee style="background-color: white; color: navy;">
+        <a href="home.html">BACK</a>
+    </marquee>
+
+</body>
+</html>

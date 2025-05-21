@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quaid E Millath Government College For Women(Autonomous)</title>
+    <style>
+        body {
+            background-color: #DEB887;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        table {
+            border-collapse: collapse;
+            margin: 20px auto;
+            width: 70%;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+        marquee {
+            margin-top: 20px;
+            padding: 10px;
+            font-size: 16px;
+            background-color: gray;
+            color: blue;
+        }
+        .faculty-list {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            width: 60%;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: left;
+        }
+    </style>
+    <script>
+        function showFaculty(department) {
+            const facultyData = {
+                "Computer Science": ["Dr.Anandhi - Head of the Department MCA,M.PHIL,PHD", "Dr.Nirmala MCA,PHD", "Dr.Vasantha Meena MCA,M.PHIL", "Dr.pushpa MCA,M.PHIL,PHD", "Dr.velumail MCA,M.PHIL,PHD", "Dr.Sumathi kinglin MCA,M.PHIL,PHD"],
+                "Tamil": ["Dr.V. Gnanambigai - Head of the Department", "Dr.Bhagya lakshmi", "Dr.Geetha"],
+                "English": ["Dr.Suganya Ravichandran - Head of the Department", "Dr.Malliga", "Dr.Vijaya sree", "Dr.Kavitha"],
+                "History": ["Dr. Amudha - Head of the Department", "Dr.Selvi", "Dr.IndhraGandhi", "Dr.Parvadhi", "Dr.Latha"],
+                "Physics": ["Dr. Rajalakshmi - Head of the Department", "Dr.Santhi", "Dr.Bhatmavadhi", "Dr.Kanaga", "Dr.shamala"],
+                "Chemistry": ["Dr.Vasanthi - Head of the Department", "Dr.kavitha", "Dr.Vijaya"],
+                "Mathematics": ["Dr. Ramaa - Head of the Department", "Dr.Seetha", "Dr.geetha", "Dr.sujathaa"]
+            };
+
+            const facultyList = facultyData[department];
+            const facultyDiv = document.getElementById("facultyDiv");
+            if (facultyList) {
+                facultyDiv.innerHTML = `
+                    <h3>Faculty Members of ${department} Department:</h3>
+                    <ul>
+                        ${facultyList.map(name => `<li>${name}</li>`).join("")}
+                    </ul>
+                `;
+            } else {
+                facultyDiv.innerHTML = `<h3>No faculty data available for ${department} Department.</h3>`;
+            }
+        }
+    </script>
+</head>
+<body>
+    <table border="1" width="100%" height="8%">
+        <tr>
+            <th>
+                <h1><font color="blue"><u>Quaid E Millath Government College For Women(Autonomous)</u></font></h1>
+            </th>
+        </tr>
+    </table>
+
+    <img src="college image.jpg.png" width="100%" height="300" alt="College Photo">
+    <img src="IMAGE staff.JPG" width="75%" height="350" align="right" alt="Staff Photo">
+
+    <table border="1">
+        <tr><td><b><a href="#" onclick="showFaculty('Computer Science')">COMPUTER SCIENCE DEPARTMENT</a></b></td></tr>
+        <tr><td><b><a href="#" onclick="showFaculty('Tamil')">TAMIL DEPARTMENT</a></b></td></tr>
+        <tr><td><b><a href="#" onclick="showFaculty('English')">ENGLISH DEPARTMENT</a></b></td></tr>
+        <tr><td><b><a href="#" onclick="showFaculty('History')">HISTORY DEPARTMENT</a></b></td></tr>
+        <tr><td><b><a href="#" onclick="showFaculty('Physics')">PHYSICS DEPARTMENT</a></b></td></tr>
+        <tr><td><b><a href="#" onclick="showFaculty('Chemistry')">CHEMISTRY DEPARTMENT</a></b></td></tr>
+        <tr><td><b><a href="#" onclick="showFaculty('Mathematics')">MATHEMATICS DEPARTMENT</a></b></td></tr>
+    </table>
+
+    <div id="facultyDiv" class="faculty-list"></div>
+<marquee style="background-color: white; color: navy;">
+        <a href="home.html">BACK</a>
+    </marquee>
+
+</body>
+</html>

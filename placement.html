@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Placement Details</title>
+    <style>
+        .student-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        button {
+            cursor: pointer;
+            padding: 5px 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Company Placement Summary</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Company</th>
+                <th>Students Placed</th>
+                <th>Details</th>
+            </tr>
+        </thead>
+        <tbody id="placementTable"></tbody>
+    </table>
+
+    <div id="studentDetails" style="display: none; margin-top: 20px;"></div>
+
+    <script>
+        const placements = [
+            {
+                company: "Google",
+                students: [
+                    { name: "yadhvika", roll: "CSE001", department: "CSE", image: "student10.jpeg" },
+                    { name: "marry john", roll: "CSE002", department: "CSE", image: "student12.jpeg" },
+                    { name: "Christiya", roll: "CSE003", department: "CSE", image: "student13.jpeg" }
+                ]
+            },
+            {
+                company: "Microsoft",
+                students: [
+                    { name: "Charlie Brown", roll: "IT004", department: "IT", image: "student4.png" },
+                    { name: "Diana Prince", roll: "IT005", department: "IT", image: "student5.jpeg" }
+                ]
+            },
+            {
+                company: "Amazon",
+                students: [
+                    { name: "Eve Adams", roll: "ECE007", department: "ECE", image: "student6.jpeg" },
+                    { name: "Frank Wright", roll: "ECE008", department: "ECE", image: "student7.jpeg" }
+                ]
+            },
+            {
+                company: "Facebook",
+                students: [
+                    { name: "Harry Potter", roll: "CS009", department: "CSE", image: "student8.jpeg" },
+                    { name: "jeevitha", roll: "CS010", department: "CSE", image: "student9.jpeg" }
+                ]
+            },
+            {
+                company: "Apple",
+                students: [
+                    { name: "mohan", roll: "IT011", department: "IT", image: "student1.png" },
+                    { name: "yadhvik ", roll: "IT012", department: "IT", image: "student2.png" }
+                ]
+            },
+            {
+                company: "Tesla",
+                students: [
+                    { name: "Elon Musk", roll: "ME013", department: "Mechanical", image: "student3.png" },
+                    { name: "Tony Stark", roll: "ME014", department: "Mechanical", image: "student4.png" }
+                ]
+            },
+            {
+                company: "Netflix",
+                students: [
+                    { name: "Rachel Green", roll: "ECE015", department: "ECE", image: "student8.jpeg" },
+                    { name: "Monica Geller", roll: "ECE016", department: "ECE", image: "student7.jpeg" }
+                ]
+            }
+        ];
+
+        function displayPlacements() {
+            const placementTable = document.getElementById("placementTable");
+            placementTable.innerHTML = ""; // Clear previous content
+
+            placements.forEach((placement, index) => {
+                const row = document.createElement("tr");
+
+                row.innerHTML = `
+                    <td>${placement.company}</td>
+                    <td>${placement.students.length}</td>
+                    <td><button onclick="viewDetails(${index})">View Details</button></td>
+                `;
+
+                placementTable.appendChild(row);
+            });
+        }
+
+        function viewDetails(index) {
+            const detailsDiv = document.getElementById("studentDetails");
+            const companyData = placements[index];
+
+            let detailsHTML = `
+                <h2>Students Placed at ${companyData.company}</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Name</th>
+                            <th>Roll Number</th>
+                            <th>Department</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+
+            companyData.students.forEach(student => {
+                detailsHTML += `
+                    <tr>
+                        <td><img src="${student.image}" alt="${student.name}" class="student-img"></td>
+                        <td>${student.name}</td>
+                        <td>${student.roll}</td>
+                        <td>${student.department}</td>
+                    </tr>
+                `;
+            });
+
+            detailsHTML += `</tbody></table>`;
+            detailsDiv.innerHTML = detailsHTML;
+            detailsDiv.style.display = "block";
+        }
+
+        document.addEventListener("DOMContentLoaded", displayPlacements);
+    </script>
+<marquee style="background-color: white; color: navy;">
+        <a href="home.html">BACK</a>
+    </marquee>
+
+</body>
+</html>

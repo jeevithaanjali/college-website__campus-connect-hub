@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Management System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f9f9f9;
+        }
+        h1, h2 {
+            text-align: center;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        button {
+            padding: 10px 15px;
+            margin: 5px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+        }
+        button.add {
+            background-color: #4CAF50;
+            color: white;
+        }
+        button.issue {
+            background-color: #008CBA;
+            color: white;
+        }
+        button.return {
+            background-color: #f44336;
+            color: white;
+        }
+        button.delete {
+            background-color: #ff9800;
+            color: white;
+        }
+        input, select {
+            padding: 10px;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Library Management System</h1>
+
+    <h2>Add New Book</h2>
+    <label for="bookId">Book ID:</label>
+    <input type="text" id="bookId" placeholder="Enter Book ID">
+    <label for="bookTitle">Title:</label>
+    <input type="text" id="bookTitle" placeholder="Enter Book Title">
+    <label for="bookAuthor">Author:</label>
+    <input type="text" id="bookAuthor" placeholder="Enter Book Author">
+    <button class="add" onclick="addBook()">Add Book</button>
+
+    <h2>Search and Filter</h2>
+    <label for="search">Search:</label>
+    <input type="text" id="search" placeholder="Search by Title or Author" onkeyup="searchBooks()">
+    <label for="filter">Filter:</label>
+    <select id="filter" onchange="filterBooks()">
+        <option value="all">All</option>
+        <option value="available">Available</option>
+        <option value="issued">Issued</option>
+    </select>
+
+    <h2>Book List</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>  
+        </thead>
+        <tbody id="bookList"></tbody>
+    </table>
+
+    <script>
+        // Load books from LocalStorage or initialize empty array
+        let books = JSON.parse(localStorage.getItem("books")) || [];
+
+        function saveBooks() {
+            localStorage.setItem("books", JSON.stringify(books));
+        }
+
+        function loadBooks(filteredBooks = books) {
+            const bookList = document.getElementById("bookList");
+            bookList.innerHTML = "";
+            filteredBooks.forEach((book) => {
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${book.id}</td>
+                    <td>${book.title}</td>
+                    <td>${book.author}</td>
+                    <td>${book.status}</td>
+                    <td>
+                        <button class="issue" onclick="updateStatus('${book.id}', 'Issued')">Issue</button>
+                        <button class="return" onclick="updateStatus('${book.id}', 'Available')">Return</button>
+                        <button class="delete" onclick="deleteBook('${book.id}')">Delete</button>
+                    </td>
+                `;
+                bookList.appendChild(row);
+            });
+        }
+
+        function updateStatus(id, status) {
+            const book = books.find((b) => b.id === id);
+            if (book) {
+                book.status = status;
+                saveBooks();
+                searchBooks();
+            }
+        }
+
+        function deleteBook(id) {
+            books = books.filter((b) => b.id !== id);
+            saveBooks();
+            searchBooks();
+        }
+
+        function addBook() {
+            const id = document.getElementById("bookId").value;
+            const title = document.getElementById("bookTitle").value;
+            const author = document.getElementById("bookAuthor").value;
+            if (id && title && author) {
+                books.push({ id, title, author, status: "Available" });
+                saveBooks();
+                document.getElementById("bookId").value = "";
+                document.getElementById("bookTitle").value = "";
+                document.getElementById("bookAuthor").value = "";
+                searchBooks();
+            }
+        }
+
+        function searchBooks() {
+            const query = document.getElementById("search").value.toLowerCase();
+            const filteredBooks = books.filter((book) =>
+                book.title.toLowerCase().includes(query) ||
+                book.author.toLowerCase().includes(query)
+            );
+            loadBooks(filteredBooks);
+        }
+
+        function filterBooks() {
+            const filter = document.getElementById("filter").value;
+            let filteredBooks = books;
+            if (filter === "available") {
+                filteredBooks = books.filter((book) => book.status === "Available");
+            } else if (filter === "issued") {
+                filteredBooks = books.filter((book) => book.status === "Issued");
+            }
+            loadBooks(filteredBooks);
+        }
+
+        // Load books on page load
+        window.onload = () => {
+            loadBooks();
+        };
+    </script>
+<marquee style="background-color: white; color: navy;">
+        <a href="home.html">BACK</a>
+    </marquee>
+
+</body>
+</html>
